@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    <img alt="Quasar logo" src="~assets/quasar-logo-full.svg">
+    <custom-calendar />
   </q-page>
 </template>
 
@@ -8,7 +8,13 @@
 </style>
 
 <script>
+import CustomCalendar from 'components/CustomCalendar/CustomCalendar.vue'
+
 export default {
-  name: 'PageIndex'
+  name: 'PageIndex',
+
+  components: {
+    CustomCalendar
+  },
 }
 </script>

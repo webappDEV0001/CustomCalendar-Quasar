@@ -47,7 +47,10 @@ module.exports = function (ctx) {
         'QListHeader',
         'QItem',
         'QItemMain',
-        'QItemSide'
+        'QItemSide',
+        'QInput',
+        'QBtnToggle',
+        'QDatetimePicker'
       ],
       directives: [
         'Ripple'

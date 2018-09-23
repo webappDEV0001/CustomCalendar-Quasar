@@ -1,0 +1,40 @@
+<div class="column">
+  <div class="row justify-center">
+    <div class="column q-pa-sm">
+      <q-datetime-picker minimal v-model="first" type="date"/>
+      <p>From:</p>
+      <q-input v-model="dateString1" />
+    </div>
+  
+    <div class="q-pa-sm">
+      <q-datetime-picker minimal v-model="second" type="date" />
+      <p>To:</p>
+      <q-input v-model="dateString2" />
+    </div>
+    
+    <div class="column justify-between q-pa-sm buttons">
+      <q-btn class="outline" text-height="20px" size="full-width" label="Today" @click="select('Today')" />
+      <q-btn class="outline" text-height="20px" size="full-width" label="This Week" @click="select('This Week')" :color="isSelected('This Week')"/>
+      <q-btn class="outline" text-height="20px" size="full-width" label="Last Week" @click="select('Last Week')"/>
+      <q-btn class="outline" text-height="20px" size="full-width" label="This Month" @click="select('This Month')"/>
+      <q-btn class="outline" text-height="20px" size="full-width" label="Last Month" @click="select('Last Month')"/>
+      <q-btn class="outline" text-height="20px" size="full-width" label="All Time" @click="select('All Time')"/>
+      <q-btn color="primary" class="outline" text-height="20px" size="full-width" label="Fixed Dates" @click="select('Fixed Dates')"/>
+    </div>
+  </div>
+
+  <div class="row justify-between">
+    <div>
+      Date Added
+    </div>
+    <div>
+      <q-btn
+        flat
+        dense
+        round
+        @click=""
+        aria-label="Apply"
+      />
+    </div>
+  </div>
+</div>
