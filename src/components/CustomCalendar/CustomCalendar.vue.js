@@ -2,8 +2,8 @@ export default {
   name: 'MyLayout',
   data () {
     return {
-      first: new Date(),
-      second: new Date(),
+      first: undefined,
+      second: undefined,
       dateString1: '',
       dateString2: '',
       range: 'one',
@@ -15,12 +15,19 @@ export default {
       console.log(title)
       this.selectedOption = title
     },
-    isSelected (title) {
-      if (title === 'This Week') {
-        return 'primary'
-      } else {
-        return ''
-      }
+    getDateString (date) {
+      date = new Date(date)
+      let month = ' ' + (date.getMonth() + 1)
+      let day = '' + date.getDate()
+      let year = date.getFullYear()
+
+      return month + '/' + day + '/' + year
+    },
+    selectFirst () {
+      this.dateString1 = this.getDateString(this.first)
+    },
+    selectSecond () {
+      this.dateString2 = this.getDateString(this.second)
     }
   }
 }
