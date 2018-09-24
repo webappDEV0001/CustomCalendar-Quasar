@@ -10,3 +10,69 @@
     background: $grey-3
     margin-top: 20px
     margin-bottom: 20px
+  .calendar-wrapper
+    .calendar
+      .prev
+        &::after
+          border-right-color: #027be3
+      .next
+        &::after
+          border-left-color: #027be3
+        &.disabled::after
+          border-left-color: #dddddd
+      .cell.day:hover
+        border: 1px solid #027be3 !important 
+      .cell.selected
+        background-color: #027be3
+        color: #ffffff
+        border-radius: 50%
+        &.highlight-start 
+          z-index: 2
+          position: relative
+          & + .highlighted
+            position: relative
+            &:after
+              content: ""
+              position: absolute
+              top: -1px
+              bottom: -1px
+              left: -50%
+              right: 100%
+              background-color: #cae5ed
+              z-index: 1
+            &.weekend.sun
+              &:after
+                content: "";
+                background-color: #cae5ed;
+                position: absolute;
+                top: calc(-100% - 3px);
+                bottom: calc(100% + 1px);
+                left: calc(650% + 11px);
+                right: calc(-600% - 13px);
+                z-index: 1;
+        &.highlight-end
+          position: relative
+          z-index: 2
+          & + .cell.day
+            position: relative
+            &:after
+              content: "";
+              background-color: #cae5ed;
+              position: absolute;
+              top: -1px;
+              bottom: -1px;
+              left: calc(-100% - 3px);
+              right: 150%;
+              z-index: 1
+            &.weekend.sun
+              &:after
+                content: "";
+                background-color: #cae5ed;
+                position: absolute;
+                top: calc(-100% - 3px);
+                bottom: calc(100% + 1px);
+                left: calc(600% + 11px);
+                right: calc(-550% - 11px);
+                z-index: 1;
+
+

@@ -1,13 +1,30 @@
 <div class="column custom-datepicker q-pa-md">
   <div class="row justify-center">
     <div class="column q-pa-sm">
-      <q-datetime-picker ref="firstpicker" minimal v-model="first" type="date" @input="selectFirst()" />
+      <date-picker
+        :inline="true"
+        v-model="first"
+        full-month-name
+        :highlighted="checkRanges()"
+        wrapper-class="calendar-wrapper"
+        calendar-class="calendar"
+        v-on:selected="selectFirst">
+      </date-picker>
+      <!-- <q-datetime-picker ref="firstpicker" minimal v-model="first" type="date" @input="selectFirst()" /> -->
       <p class="q-mt-md q-mb-none text-light">From:</p>
       <q-input v-model="dateString1" />
     </div>
   
     <div class="q-pa-sm">
-      <q-datetime-picker ref="secondpicker" minimal v-model="second" type="date" @input="selectSecond()" />
+      <date-picker
+        :inline="true"
+        v-model="second"
+        full-month-name
+        :highlighted="checkRanges()"
+        wrapper-class="calendar-wrapper"
+        calendar-class="calendar"
+        v-on:selected="selectSecond">
+      </date-picker>
       <p class="q-mt-md q-mb-none text-light">To:</p>
       <q-input v-model="dateString2" />
     </div>

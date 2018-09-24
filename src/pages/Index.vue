@@ -15,6 +15,6 @@ export default {
 
   components: {
     CustomCalendar
-  },
+  }
 }
 </script>

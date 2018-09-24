@@ -1,16 +1,40 @@
+import DatePicker from 'components/vuejs-datepicker'
+
 export default {
   name: 'MyLayout',
+
+  components: {
+    DatePicker
+  },
+
   data () {
     return {
-      first: undefined,
-      second: undefined,
+      first: new Date(),
+      second: new Date(),
       dateString1: '',
       dateString2: '',
       range: 'one',
       selectedOption: 'Fixed Dates'
     }
   },
+  mounted () {
+    this.selectFirst(this.first)
+    this.selectSecond(this.second)
+  },
+
   methods: {
+    checkRanges () {
+      let highlighted = {
+        from: this.first,
+        to: this.second
+      }
+      if (this.dateString1 === this.dateString2) {
+        highlighted = {
+          dates: []
+        }
+      }
+      return highlighted
+    },
     select (title) {
       console.log(title)
       this.selectedOption = title
@@ -23,10 +47,12 @@ export default {
 
       return month + '/' + day + '/' + year
     },
-    selectFirst () {
+    selectFirst (val) {
+      this.first = val
       this.dateString1 = this.getDateString(this.first)
     },
-    selectSecond () {
+    selectSecond (val) {
+      this.second = val
       this.dateString2 = this.getDateString(this.second)
     },
     select (strRange) {
