@@ -35,6 +35,18 @@ export default {
       }
       return highlighted
     },
+    disabledFirstDates () {
+      let disabledDates = {
+        from: this.second
+      }
+      return disabledDates
+    },
+    disabledSecondDates() {
+      let disabledDates = {
+        to: this.first
+      }
+      return disabledDates
+    },
     select (title) {
       console.log(title)
       this.selectedOption = title
