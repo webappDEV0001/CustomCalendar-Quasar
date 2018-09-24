@@ -1,4 +1,4 @@
-import DatePicker from 'components/vuejs-datepicker'
+import DatePicker from 'components/vuejs-datepicker/src/components/DatePicker'
 
 export default {
   name: 'MyLayout',

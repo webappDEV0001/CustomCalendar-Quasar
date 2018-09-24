@@ -22,7 +22,9 @@
           :key="day.timestamp"
           :class="dayClasses(day)"
           v-html="dayCellContent(day)"
-          @click="selectDate(day)"></span>
+          @click="selectDate(day)">
+        </span>
+        <span class="cell day blank"></span>
     </div>
   </div>
 </template>
@@ -54,6 +56,9 @@ export default {
     return {
       utils: constructedDateUtils
     }
+  },
+  mounted () {
+    console.log('************')
   },
   computed: {
     /**
