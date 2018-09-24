@@ -1,39 +1,45 @@
 {
-  "_from": "vuejs-datepicker",
-  "_id": "vuejs-datepicker@1.5.2",
-  "_inBundle": false,
-  "_integrity": "sha512-PV3wo/kkpFmISCTvZVU3HnSQHvApVHfv0LMZjW+qMJv69dksD9RJTpBfxxrCJpR83GInTDfz4TDwip02Fd8btA==",
-  "_location": "/vuejs-datepicker",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "tag",
-    "registry": true,
-    "raw": "vuejs-datepicker",
-    "name": "vuejs-datepicker",
-    "escapedName": "vuejs-datepicker",
-    "rawSpec": "",
-    "saveSpec": null,
-    "fetchSpec": "latest"
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
+  "name": "vuejs-datepicker",
+  "version": "1.5.3",
+  "description": "A simple Vue.js datepicker component. Supports disabling of dates, inline mode, translations",
+  "keywords": [
+    "vue",
+    "datepicker",
+    "date-picker",
+    "calendar"
   ],
-  "_resolved": "https://registry.npmjs.org/vuejs-datepicker/-/vuejs-datepicker-1.5.2.tgz",
-  "_shasum": "e89e8ec91f1a5c50e229934f47b611fbb8d20e68",
-  "_spec": "vuejs-datepicker",
-  "_where": "/Volumes/Data/Working/TrackPingMonitor-site",
-  "author": {
-    "name": "Charlie Kassel",
-    "email": "ck@charliekassel.com"
+  "main": "dist/vuejs-datepicker.js",
+  "module": "dist/vuejs-datepicker.esm.js",
+  "unpkg": "dist/vuejs-datepicker.min.js",
+  "files": [
+    "src",
+    "dist"
+  ],
+  "author": "Charlie Kassel <ck@charliekassel.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/charliekassel/vuejs-datepicker"
   },
   "bugs": {
     "url": "https://github.com/charliekassel/vuejs-datepicker/issues"
   },
-  "bundleDependencies": false,
+  "private": false,
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn lint && rm -rf dist/* && babel-node scripts/build.js && babel-node scripts/build-locale.js",
+    "serve": "rollup -c scripts/serve.js --watch",
+    "test": "jest --config test/unit/jest.conf.js --coverage",
+    "lint": "eslint --ext .js,.vue src test/unit/specs",
+    "prepublishOnly": "yarn build"
+  },
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
   "dependencies": {},
-  "deprecated": false,
-  "description": "A simple Vue.js datepicker component. Supports disabling of dates, inline mode, translations",
+  "peerDependencies": {
+    "vue": "^2.3.0"
+  },
   "devDependencies": {
     "@vue/test-utils": "^1.0.0-beta.12",
     "autoprefixer": "^8.3.0",
@@ -83,41 +89,5 @@
     "vue-jest": "^2.2.1",
     "vue-server-renderer": "^2.5.16",
     "vue-template-compiler": "^2.5.16"
-  },
-  "files": [
-    "src",
-    "dist"
-  ],
-  "homepage": "https://github.com/charliekassel/vuejs-datepicker#readme",
-  "keywords": [
-    "vue",
-    "datepicker",
-    "date-picker",
-    "calendar"
-  ],
-  "license": "MIT",
-  "main": "dist/vuejs-datepicker.js",
-  "module": "dist/vuejs-datepicker.esm.js",
-  "name": "vuejs-datepicker",
-  "peerDependencies": {
-    "vue": "^2.3.0"
-  },
-  "pre-commit": [
-    "lint",
-    "test"
-  ],
-  "private": false,
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/charliekassel/vuejs-datepicker.git"
-  },
-  "scripts": {
-    "build": "yarn lint && rm -rf dist/* && babel-node scripts/build.js && babel-node scripts/build-locale.js",
-    "lint": "eslint --ext .js,.vue src test/unit/specs",
-    "prepublishOnly": "yarn build",
-    "serve": "rollup -c scripts/serve.js --watch",
-    "test": "jest --config test/unit/jest.conf.js --coverage"
-  },
-  "unpkg": "dist/vuejs-datepicker.min.js",
-  "version": "1.5.2"
+  }
 }
