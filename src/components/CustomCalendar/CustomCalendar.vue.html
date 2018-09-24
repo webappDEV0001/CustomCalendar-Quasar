@@ -1,13 +1,13 @@
 <div class="column custom-datepicker q-pa-md">
   <div class="row justify-center">
     <div class="column q-pa-sm">
-      <q-datetime-picker minimal v-model="first" type="date" @input="selectFirst()" />
+      <q-datetime-picker ref="firstpicker" minimal v-model="first" type="date" @input="selectFirst()" />
       <p class="q-mt-md q-mb-none text-light">From:</p>
       <q-input v-model="dateString1" />
     </div>
   
     <div class="q-pa-sm">
-      <q-datetime-picker minimal v-model="second" type="date" @input="selectSecond()" />
+      <q-datetime-picker ref="secondpicker" minimal v-model="second" type="date" @input="selectSecond()" />
       <p class="q-mt-md q-mb-none text-light">To:</p>
       <q-input v-model="dateString2" />
     </div>
@@ -29,11 +29,11 @@
   <div class="row justify-between">
     <div class="q-body-1 text-faded">
       <span class="text-bold">Date Added </span>
-      <span>is from {{ dateString1 }} to {{ dateString2 }}</span>
+      <span v-if="first != undefined || second != undefined">is from {{ dateString1 }} to {{ dateString2 }}</span>
     </div>
     <div>
       <q-btn flat color="primary" label="Apply" :disable="first == undefined || second == undefined ? true : false" @click=""/>
-      <q-btn flat color="grey" label="Clear" @click=""/>
+      <q-btn flat color="grey" label="Clear" @click="onClear"/>
     </div>
   </div>
 </div>
