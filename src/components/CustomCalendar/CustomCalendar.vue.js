@@ -103,30 +103,32 @@ export default {
       
       this.dateString1 = this.getDateString(this.first)
       this.dateString2 = this.getDateString(this.second)
+
+
     },
     getFirstDateOfThisWeek() {
       let d = new Date();
       let day = d.getDay()
       let diff = d.getDate() - day + (day == 0 ? -7 : 0)
-      return new Date(d.setDate(diff))
+      return new Date(d.getFullYear(), d.getMonth(), diff)
     },
     getLastDateOfThisWeek() {
       let d = new Date();
       let day = d.getDay()
       let diff = d.getDate() - day + 6
-      return new Date(d.setDate(diff))
+      return new Date(d.getFullYear(), d.getMonth(), diff)
     },
     getFirstDateOfLastWeek() {
       let d = new Date();
       let day = d.getDay()
       let diff = d.getDate() - day - 7
-      return new Date(d.setDate(diff))
+      return new Date(d.getFullYear(), d.getMonth(), diff)
     },
     getLastDateOfLastWeek() {
       let d = new Date();
       let day = d.getDay()
       let diff = d.getDate() - day - 1
-      return new Date(d.setDate(diff))
+      return new Date(d.getFullYear(), d.getMonth(), diff)
     },
     onClear () {
       this.first = undefined
