@@ -14,15 +14,48 @@ export default {
       dateString1: '',
       dateString2: '',
       range: 'one',
-      selectedOption: 'Fixed Dates'
+      selectedOption: 'Fixed Dates',
+      firstInputError: false,
+      secondInputError: false
     }
   },
+
   mounted () {
     this.selectFirst(this.first)
     this.selectSecond(this.second)
   },
 
   methods: {
+    onFinishFirst () {
+      const dateRegExp = new RegExp(/^([1-9]|1[0-2])\/([1-9]|[12][0-9]|3[01])\/[0-9]{4}$/)
+      this.dateString1 = this.dateString1.replace(/ /g,'')
+      if (dateRegExp.test(this.dateString1)) {
+        let date = new Date(this.dateString1)
+        if (this.first.getTime() > date.getTime()) {
+          this.first = date
+          this.firstInputError = false
+        } else {
+          this.firstInputError = true
+        }
+      } else {
+        this.firstInputError = true
+      }
+    },
+    onFinishSecond () {
+      const dateRegExp = new RegExp(/^([1-9]|1[0-2])\/([1-9]|[12][0-9]|3[01])\/[0-9]{4}$/)
+      this.dateString2 = this.dateString2.replace(/ /g,'')
+      if (dateRegExp.test(this.dateString2)) {
+        let date = new Date(this.dateString2)
+        if (this.first.getTime() < date.getTime()) {
+          this.second = date
+          this.secondInputError = false
+        } else {
+          this.secondInputError = true
+        }
+      } else {
+        this.secondInputError = true
+      }
+    },
     checkRanges () {
       let highlighted = {
         from: this.first,
@@ -60,10 +93,12 @@ export default {
       return month + '/' + day + '/' + year
     },
     selectFirst (val) {
+      this.firstInputError = false
       this.first = val
       this.dateString1 = this.getDateString(this.first)
     },
     selectSecond (val) {
+      this.secondInputError = false
       this.second = val
       this.dateString2 = this.getDateString(this.second)
     },

@@ -13,7 +13,13 @@
       </date-picker>
       <!-- <q-datetime-picker ref="firstpicker" minimal v-model="first" type="date" @input="selectFirst()" /> -->
       <p class="q-mt-md q-mb-none text-light">From:</p>
-      <q-input v-model="dateString1" />
+      <q-input 
+        v-model="dateString1" 
+        @keyup.enter="onFinishFirst" 
+        placeholder="MM/DD/YYYY"
+        :error="firstInputError"
+        error-label="Some error"/>
+      <small v-if="firstInputError" class="error-text">Invalid Date</small>
     </div>
   
     <div class="q-pa-sm">
@@ -28,7 +34,12 @@
         v-on:selected="selectSecond">
       </date-picker>
       <p class="q-mt-md q-mb-none text-light">To:</p>
-      <q-input v-model="dateString2" />
+      <q-input 
+        v-model="dateString2" 
+        @keyup.enter="onFinishSecond" 
+        placeholder="MM/DD/YYYY"
+        :error="secondInputError"/>
+      <small v-if="secondInputError" class="error-text">Invalid Date</small>
     </div>
     
     <div class="column justify-between q-pa-sm buttons">
