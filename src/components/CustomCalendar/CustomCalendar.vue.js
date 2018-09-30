@@ -31,13 +31,14 @@ export default {
       this.dateString1 = this.dateString1.replace(/ /g,'')
       if (dateRegExp.test(this.dateString1)) {
         let date = new Date(this.dateString1)
-        if (this.first.getTime() > date.getTime()) {
+        if (this.second.getTime() >= date.getTime()) {
           this.first = date
           this.firstInputError = false
         } else {
           this.firstInputError = true
         }
       } else {
+        console.log('========')
         this.firstInputError = true
       }
     },
@@ -46,7 +47,7 @@ export default {
       this.dateString2 = this.dateString2.replace(/ /g,'')
       if (dateRegExp.test(this.dateString2)) {
         let date = new Date(this.dateString2)
-        if (this.first.getTime() < date.getTime()) {
+        if (this.first.getTime() <= date.getTime()) {
           this.second = date
           this.secondInputError = false
         } else {

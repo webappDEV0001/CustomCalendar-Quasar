@@ -15,7 +15,7 @@
       <p class="q-mt-md q-mb-none text-light">From:</p>
       <q-input 
         v-model="dateString1" 
-        @keyup.enter="onFinishFirst" 
+        @keyup="onFinishFirst" 
         placeholder="MM/DD/YYYY"
         :error="firstInputError"
         error-label="Some error"/>
@@ -36,7 +36,7 @@
       <p class="q-mt-md q-mb-none text-light">To:</p>
       <q-input 
         v-model="dateString2" 
-        @keyup.enter="onFinishSecond" 
+        @keyup="onFinishSecond" 
         placeholder="MM/DD/YYYY"
         :error="secondInputError"/>
       <small v-if="secondInputError" class="error-text">Invalid Date</small>
