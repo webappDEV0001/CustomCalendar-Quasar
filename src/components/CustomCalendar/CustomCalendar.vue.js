@@ -165,11 +165,18 @@ export default {
       let selectedDate = this.formatDate(this.first)
 
       if (this.first != undefined && newDate == selectedDate) {
-        console.log('------------')
         this.first = undefined
+        const selectedElement = document.querySelector('span.highlight-end')
+        this.$nextTick(() => {
+          selectedElement.classList.add('highlight-end')
+        })
       } else {
-        console.log('============')
         this.first = val
+        this.$nextTick(() => {
+          const selectedElement = document.querySelector('span.selected')
+          if (!selectedElement.classList.contains('highlight-start'))
+            selectedElement.classList.add('highlight-start')
+        })
       }
       
       this.dateString1 = this.getDateString(this.first)
@@ -183,6 +190,10 @@ export default {
 
       if (this.second != undefined && newDate == selectedDate) {
         this.second = undefined
+        const selectedElement = document.querySelector('span.highlight-start')
+        this.$nextTick(() => {
+          selectedElement.classList.add('highlight-start')
+        })
       } else {
         this.second = val
       }
