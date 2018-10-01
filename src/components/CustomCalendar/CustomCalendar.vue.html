@@ -59,7 +59,7 @@
   <div class="row justify-between">
     <div class="q-body-1 text-faded">
       <span class="text-bold">Date Added </span>
-      <span v-if="first != undefined || second != undefined">is from {{ dateString1 }} to {{ dateString2 }}</span>
+      <span v-if="first != undefined || second != undefined">is {{ dateString1 == '' ? '' : 'from ' + dateString1 }} {{ dateString2 == '' ? '' : 'to ' + dateString2 }}</span>
     </div>
     <div>
       <q-btn flat color="primary" label="Apply" :disable="first == undefined || second == undefined ? true : false" @click=""/>
