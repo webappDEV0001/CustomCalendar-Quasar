@@ -80,7 +80,6 @@ export default {
             dates: []
           }
         } else {
-          console.log('-------')
           highlighted = {
             customPredictor: (date) => {
               if (date.getTime() <= this.second.getTime()) {
@@ -243,7 +242,6 @@ export default {
         this.second = undefined
       }
       if (strRange === 'Fixed Dates') {
-        console.log(this.first, this.second)
       } 
       
       if (this.first == undefined) {
