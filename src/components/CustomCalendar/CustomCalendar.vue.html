@@ -3,7 +3,7 @@
     <div class="column q-pa-sm">
       <date-picker
         :inline="true"
-        v-model="first"
+        :value="first"
         full-month-name
         :highlighted="checkRanges()"
         :disabled-dates="disabledFirstDates()"
@@ -11,7 +11,7 @@
         calendar-class="calendar"
         v-on:selected="selectFirst">
       </date-picker>
-      <!-- <q-datetime-picker ref="firstpicker" minimal v-model="first" type="date" @input="selectFirst()" /> -->
+      
       <p class="q-mt-md q-mb-none text-light">From:</p>
       <q-input 
         v-model="dateString1" 
@@ -25,7 +25,7 @@
     <div class="q-pa-sm">
       <date-picker
         :inline="true"
-        v-model="second"
+        :value="second"
         full-month-name
         :highlighted="checkRanges()"
         :disabled-dates="disabledSecondDates()"

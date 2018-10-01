@@ -31,7 +31,8 @@
           color: #ffffff
           border-radius: 50%
       // first
-      .cell.selected.highlighted
+      
+      .cell.day.selected
         background: #027be3
         color: #ffffff
         border-radius: 50%
@@ -92,7 +93,7 @@
               left: calc(-100% - 12px);
               right: calc(150% + 1px);
               z-index: 1
-      
+
       .cell.day.disabled
         & + .cell.day.highlighted
           background: #027be3

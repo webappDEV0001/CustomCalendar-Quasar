@@ -9,8 +9,10 @@ export default {
 
   data () {
     return {
-      first: undefined,
-      second: undefined,
+      first: new Date(),
+      second: new Date(),
+      firstTemp: undefined,
+      secondTemp: undefined,
       dateString1: '',
       dateString2: '',
       range: 'one',
@@ -21,8 +23,8 @@ export default {
   },
 
   mounted () {
-    this.selectFirst(this.first)
-    this.selectSecond(this.second)
+    // this.selectFirst(this.first)
+    // this.selectSecond(this.second)
   },
 
   methods: {
@@ -159,18 +161,46 @@ export default {
     },
     selectFirst (val) {
       this.firstInputError = false
-      this.first = val
+      let newDate = this.formatDate(val)
+      let selectedDate = this.formatDate(this.first)
+
+      if (this.first != undefined && newDate == selectedDate) {
+        console.log('------------')
+        this.first = undefined
+      } else {
+        console.log('============')
+        this.first = val
+      }
+      
       this.dateString1 = this.getDateString(this.first)
       this.select('Fixed Dates')
     },
-    clearFirst (val) {
-
-    },
     selectSecond (val) {
       this.secondInputError = false
-      this.second = val
+
+      let newDate = this.formatDate(val)
+      let selectedDate = this.formatDate(this.second)
+
+      if (this.second != undefined && newDate == selectedDate) {
+        this.second = undefined
+      } else {
+        this.second = val
+      }
+
       this.dateString2 = this.getDateString(this.second)
       this.select('Fixed Dates')
+    },
+    formatDate (date) {
+      if (date == undefined) return ''
+      let d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear()
+      
+      if (month.length < 2) month = '0' + month
+      if (day.length < 2) day = '0' + day
+
+      return [year, month, day].join('-')
     },
     select (strRange) {
       this.selectedOption = strRange
