@@ -24,80 +24,195 @@
           border-left-color: #dddddd
       .cell.day:hover
         border: 1px solid #027be3 !important 
-      .cell.today
+      .cell.day.today
         color: #027be3
-      .cell.selected
-        background-color: #027be3
+        &.selected
+          background: #027be3
+          color: #ffffff
+          border-radius: 50%
+      // first
+      .cell.selected.highlighted
+        background: #027be3
         color: #ffffff
         border-radius: 50%
-        &.highlight-start 
-          z-index: 2
+        z-index: 3
+        position: relative
+        & + .cell.day.highlighted
           position: relative
-          & + .highlighted
-            position: relative
-            &:after
-              content: ""
-              position: absolute
-              top: -1px
-              bottom: -1px
-              left: -50%
-              right: calc(100% + 1px)
-              background-color: #cae5ed
-              z-index: 1
-            &.weekend.sun
-              &:after
-                content: "";
-                background-color: #cae5ed;
-                position: absolute;
-                top: calc(-100% - 3px);
-                bottom: calc(100% + 1px);
-                left: calc(650% + 11px);
-                right: calc(-600% - 13px);
-                z-index: 1;
-          & + .cell.day.blank
-            position: relative
-            &:after
-              content: ""
-              position: absolute
-              top: -1px
-              bottom: -1px
-              left: -50%
-              right: calc(100% + 1px)
-              background-color: #cae5ed
-              z-index: 1
-        &.highlight-end
-          position: relative
-          z-index: 2
-          & + .cell.day
-            position: relative
+          &:after
+            content: ''
+            background: #cae5ed;
+            position: absolute;
+            top: -1px;
+            bottom: -1px;
+            left: -50%;
+            right: calc(100% + 1px);
+            z-index: 1
+          &.weekend.sun
             &:after
               content: ''
-              background-color: #cae5ed;
+              background: #cae5ed
+              position: absolute
+              top: calc(-100% - 3px)
+              bottom: calc(100% + 1px)
+              left: calc(650% + 11px)
+              right: calc(-600% - 13px)
+              z-index: 1
+              
+        & + .cell.day
+          position: relative
+          &:after
+            content: ''
+            background: #cae5ed;
+            position: absolute;
+            top: -1px;
+            bottom: -1px;
+            left: calc(-100% - 3px);
+            right: calc(150% + 1px);
+            z-index: 1
+          &.weekend.sun
+            &:after
+              content: ''
+              background: #cae5ed
+              position: absolute
+              top: calc(-100% - 3px)
+              bottom: calc(100% + 1px)
+              left: calc(600% + 11px)
+              right: calc(-550% - 13px)
+              z-index: 1
+          &.blank
+            position: relative
+            width: calc(14% - 4px);
+            &:after
+              content: "";
+              background: #cae5ed;
               position: absolute;
               top: -1px;
               bottom: -1px;
-              left: calc(-100% - 3px);
-              right: 150%;
+              left: calc(-100% - 12px);
+              right: calc(150% + 1px);
+              z-index: 1
+      
+      .cell.day.disabled
+        & + .cell.day.highlighted
+          background: #027be3
+          color: #ffffff
+          border-radius: 50%
+          z-index: 3
+          position: relative
+          & + .cell.day.highlighted
+            position: relative
+            &:after
+              content: ''
+              background: #cae5ed;
+              position: absolute;
+              top: -1px;
+              bottom: -1px;
+              left: -50%;
+              right: calc(100% + 1px);
               z-index: 1
             &.weekend.sun
               &:after
                 content: ''
-                background-color: #cae5ed
+                background: #cae5ed
                 position: absolute
                 top: calc(-100% - 3px)
                 bottom: calc(100% + 1px)
-                left: calc(600% + 11px)
-                right: calc(-550% - 11px)
+                left: calc(650% + 11px)
+                right: calc(-600% - 13px)
                 z-index: 1
           & + .cell.day.blank
             position: relative
             width: calc(14% - 4px);
             &:after
               content: "";
-              background-color: #cae5ed;
+              background: #cae5ed;
               position: absolute;
               top: -1px;
               bottom: -1px;
-              left: calc(-100% - 12px);
-              right: 150%;
+              left: calc(-50% - 12px);
+              right: calc(100% + 1px);
               z-index: 1
+      // from - to
+      .cell.day.highlight-start
+        background: #027be3
+        color: #ffffff
+        border-radius: 50%
+        z-index: 3
+        position: relative
+        & + .cell.day.highlighted
+          position: relative
+          &:after
+            content: ''
+            background: #cae5ed;
+            position: absolute;
+            top: -1px;
+            bottom: -1px;
+            left: -50%;
+            right: calc(100% + 1px);
+            z-index: 1
+          &.weekend.sun
+            &:after
+              content: ''
+              background: #cae5ed
+              position: absolute
+              top: calc(-100% - 3px)
+              bottom: calc(100% + 1px)
+              left: calc(650% + 11px)
+              right: calc(-600% - 13px)
+              z-index: 1
+        & + .cell.day.blank
+          position: relative
+          width: calc(14% - 4px);
+          &:after
+            content: "";
+            background: #cae5ed;
+            position: absolute;
+            top: -1px;
+            bottom: -1px;
+            left: calc(-50% - 12px);
+            right: calc(100% + 1px);
+            z-index: 1
+      .cell.day.highlight-end
+        background: #027be3
+        color: #ffffff
+        border-radius: 50%
+        z-index: 2
+        position: relative
+        & + .cell.day
+          position: relative
+          opacity: 1 !important
+          &:after
+            content: ''
+            background: #cae5ed;
+            position: absolute;
+            top: -1px;
+            bottom: -1px;
+            left: calc(-100% - 3px);
+            right: calc(150% + 1px);
+            z-index: 1
+          &.weekend.sun
+            &:after
+              content: ''
+              background: #cae5ed
+              position: absolute
+              top: calc(-100% - 3px)
+              bottom: calc(100% + 1px)
+              left: calc(600% + 11px)
+              right: calc(-550% - 13px)
+              z-index: 1
+        & + .cell.day.blank
+          position: relative
+          width: calc(14% - 4px);
+          &:after
+            content: "";
+            background: #cae5ed;
+            position: absolute;
+            top: -1px;
+            bottom: -1px;
+            left: calc(-100% - 12px);
+            right: calc(150% + 1px);
+            z-index: 1
+      .cell.day.highlight-start.highlight-end
+        & + .cell.day:after
+          background: transparent !important

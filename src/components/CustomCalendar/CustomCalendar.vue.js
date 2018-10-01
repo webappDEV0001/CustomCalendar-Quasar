@@ -9,12 +9,12 @@ export default {
 
   data () {
     return {
-      first: new Date(),
-      second: new Date(),
+      first: undefined,
+      second: undefined,
       dateString1: '',
       dateString2: '',
       range: 'one',
-      selectedOption: 'Fixed Dates',
+      selectedOption: 'All Time',
       firstInputError: false,
       secondInputError: false
     }
@@ -31,14 +31,21 @@ export default {
       this.dateString1 = this.dateString1.replace(/ /g,'')
       if (dateRegExp.test(this.dateString1)) {
         let date = new Date(this.dateString1)
-        if (this.second.getTime() >= date.getTime()) {
+        if (this.second == undefined) {
           this.first = date
           this.firstInputError = false
         } else {
-          this.firstInputError = true
+          if (this.second.getTime() >= date.getTime()) {
+            this.first = date
+            this.firstInputError = false
+          } else {
+            this.first = undefined
+            this.firstInputError = true
+          }
         }
+        
       } else {
-        console.log('========')
+        this.first = undefined
         this.firstInputError = true
       }
     },
@@ -47,26 +54,81 @@ export default {
       this.dateString2 = this.dateString2.replace(/ /g,'')
       if (dateRegExp.test(this.dateString2)) {
         let date = new Date(this.dateString2)
-        if (this.first.getTime() <= date.getTime()) {
+        if (this.first == undefined) {
           this.second = date
           this.secondInputError = false
         } else {
-          this.secondInputError = true
+          if (this.first.getTime() <= date.getTime()) {
+            this.second = date
+            this.secondInputError = false
+          } else {
+            this.secondInputError = true
+          }
         }
+        
       } else {
         this.secondInputError = true
       }
     },
-    checkRanges () {
-      let highlighted = {
-        from: this.first,
-        to: this.second
-      }
-      if (this.dateString1 === this.dateString2) {
-        highlighted = {
-          dates: []
+    checkRanges () {      
+      var highlighted = {}
+      if (this.first == undefined) {
+        if (this.second == undefined) {
+          highlighted = {
+            dates: []
+          }
+        } else {
+          console.log('-------')
+          highlighted = {
+            customPredictor: (date) => {
+              if (date.getTime() <= this.second.getTime()) {
+                return true
+              }
+            }
+          }
+        }
+      } else {
+        if (this.second == undefined) {
+          highlighted = {
+            customPredictor: (date) => {
+              if (date.getTime() >= this.first.getTime()) {
+                return true
+              }
+            }
+          }
+        } else {
+          highlighted = {
+            from: new Date(this.first.getFullYear(), this.first.getMonth(), this.first.getDate()),
+            to: this.second
+          }
         }
       }
+
+      // let highlighted = {
+      //   customPredictor: (date) => {
+      //     if (this.first == undefined) {
+      //       if (this.second == undefined) {
+              
+      //       } else {
+      //         if (date.getTime() <= this.second.getTime()) {
+      //           return true
+      //         }
+      //       }
+      //     } else {
+      //       if (this.second == undefined) {
+      //         if (date.getTime() >= this.first.getTime()) {
+      //           return true
+      //         }
+      //       } else {
+      //         if (date.getTime() >= this.first.getTime() && date.getTime() <= this.second.getTime()) {
+      //           return true
+      //         }
+      //       }
+      //     }
+          
+      //   }
+      // }
+
       return highlighted
     },
     disabledFirstDates () {
@@ -76,16 +138,18 @@ export default {
       return disabledDates
     },
     disabledSecondDates() {
+      if (this.first == undefined) {
+        return disabledDates = {}
+      }
       let disabledDates = {
-        to: this.first
+        to: new Date(this.first.getFullYear(), this.first.getMonth(), this.first.getDate())
       }
       return disabledDates
     },
-    select (title) {
-      console.log(title)
-      this.selectedOption = title
-    },
     getDateString (date) {
+      if (date == undefined) {
+        return ''
+      }
       date = new Date(date)
       let month = ' ' + (date.getMonth() + 1)
       let day = '' + date.getDate(0)
@@ -97,11 +161,16 @@ export default {
       this.firstInputError = false
       this.first = val
       this.dateString1 = this.getDateString(this.first)
+      this.select('Fixed Dates')
+    },
+    clearFirst (val) {
+
     },
     selectSecond (val) {
       this.secondInputError = false
       this.second = val
       this.dateString2 = this.getDateString(this.second)
+      this.select('Fixed Dates')
     },
     select (strRange) {
       this.selectedOption = strRange
@@ -129,18 +198,24 @@ export default {
         this.second = new Date(d.getFullYear(), d.getMonth(), 0)
       }
       if (strRange === 'All Time') {
-        this.first = new Date()
-        this.second = new Date()
+        this.first = undefined
+        this.second = undefined
       }
       if (strRange === 'Fixed Dates') {
-        this.first = new Date()
-        this.second = new Date()
+        console.log(this.first, this.second)
       } 
       
-      this.dateString1 = this.getDateString(this.first)
-      this.dateString2 = this.getDateString(this.second)
-
-
+      if (this.first == undefined) {
+        this.dateString1 = ''
+      } else {
+        this.dateString1 = this.getDateString(this.first)
+      } 
+      if (this.second == undefined) {
+        this.dateString2 = ''
+      } else {
+        this.dateString2 = this.getDateString(this.second)
+      }
+      
     },
     getFirstDateOfThisWeek() {
       let d = new Date();
