@@ -179,7 +179,11 @@ export default {
       }
       
       this.dateString1 = this.getDateString(this.first)
-      this.select('Fixed Dates')
+      if (this.first == undefined && this.second == undefined) {
+        this.select('All Time')
+      } else {
+        this.select('Fixed Dates')
+      }
     },
     selectSecond (val) {
       this.secondInputError = false
@@ -198,7 +202,12 @@ export default {
       }
 
       this.dateString2 = this.getDateString(this.second)
-      this.select('Fixed Dates')
+      if (this.first == undefined && this.second == undefined) {
+        this.select('All Time')
+      } else {
+        this.select('Fixed Dates')
+      }
+      
     },
     formatDate (date) {
       if (date == undefined) return ''
