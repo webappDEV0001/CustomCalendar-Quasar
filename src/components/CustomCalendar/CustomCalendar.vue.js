@@ -33,7 +33,7 @@ export default {
       this.dateString1 = this.dateString1.replace(/ /g,'')
       if (dateRegExp.test(this.dateString1)) {
         let date = new Date(this.dateString1)
-        if (this.second == undefined) {
+        if (typeof this.second === 'undefined') {
           this.first = date
           this.firstInputError = false
         } else {
@@ -45,7 +45,7 @@ export default {
             this.firstInputError = true
           }
         }
-        
+
       } else {
         this.first = undefined
         this.firstInputError = true
@@ -56,7 +56,7 @@ export default {
       this.dateString2 = this.dateString2.replace(/ /g,'')
       if (dateRegExp.test(this.dateString2)) {
         let date = new Date(this.dateString2)
-        if (this.first == undefined) {
+        if (typeof this.first === 'undefined') {
           this.second = date
           this.secondInputError = false
         } else {
@@ -67,15 +67,15 @@ export default {
             this.secondInputError = true
           }
         }
-        
+
       } else {
         this.secondInputError = true
       }
     },
-    checkRanges () {      
+    checkRanges () {
       var highlighted = {}
-      if (this.first == undefined) {
-        if (this.second == undefined) {
+      if (typeof this.first === 'undefined') {
+        if (typeof this.second === 'undefined') {
           highlighted = {
             dates: []
           }
@@ -89,7 +89,7 @@ export default {
           }
         }
       } else {
-        if (this.second == undefined) {
+        if (typeof this.second === 'undefined') {
           highlighted = {
             customPredictor: (date) => {
               if (date.getTime() >= this.first.getTime()) {
@@ -109,7 +109,7 @@ export default {
       //   customPredictor: (date) => {
       //     if (this.first == undefined) {
       //       if (this.second == undefined) {
-              
+
       //       } else {
       //         if (date.getTime() <= this.second.getTime()) {
       //           return true
@@ -126,7 +126,7 @@ export default {
       //         }
       //       }
       //     }
-          
+
       //   }
       // }
 
@@ -139,7 +139,7 @@ export default {
       return disabledDates
     },
     disabledSecondDates() {
-      if (this.first == undefined) {
+      if (typeof this.first === 'undefined') {
         return disabledDates = {}
       }
       let disabledDates = {
@@ -148,7 +148,7 @@ export default {
       return disabledDates
     },
     getDateString (date) {
-      if (date == undefined) {
+      if (typeof date === 'undefined') {
         return ''
       }
       date = new Date(date)
@@ -163,7 +163,7 @@ export default {
       let newDate = this.formatDate(val)
       let selectedDate = this.formatDate(this.first)
 
-      if (this.first != undefined && newDate == selectedDate) {
+      if (typeof this.first !== 'undefined' && newDate === selectedDate) {
         this.first = undefined
         const selectedElement = document.querySelector('span.highlight-end')
         this.$nextTick(() => {
@@ -177,9 +177,9 @@ export default {
             selectedElement.classList.add('highlight-start')
         })
       }
-      
+
       this.dateString1 = this.getDateString(this.first)
-      if (this.first == undefined && this.second == undefined) {
+      if (typeof this.first === 'undefined' && typeof this.second === 'undefined') {
         this.select('All Time')
       } else {
         this.select('Fixed Dates')
@@ -191,7 +191,7 @@ export default {
       let newDate = this.formatDate(val)
       let selectedDate = this.formatDate(this.second)
 
-      if (this.second != undefined && newDate == selectedDate) {
+      if (typeof this.second !== 'undefined' && newDate === selectedDate) {
         this.second = undefined
         const selectedElement = document.querySelector('span.highlight-start')
         this.$nextTick(() => {
@@ -202,20 +202,20 @@ export default {
       }
 
       this.dateString2 = this.getDateString(this.second)
-      if (this.first == undefined && this.second == undefined) {
+      if (typeof this.first === 'undefined' && typeof this.second === 'undefined') {
         this.select('All Time')
       } else {
         this.select('Fixed Dates')
       }
-      
+
     },
     formatDate (date) {
-      if (date == undefined) return ''
+      if (typeof date === 'undefined') return ''
       let d = new Date(date),
         month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
         year = d.getFullYear()
-      
+
       if (month.length < 2) month = '0' + month
       if (day.length < 2) day = '0' + day
 
@@ -231,8 +231,8 @@ export default {
       if (strRange === 'This Week') {
         this.first = this.getFirstDateOfThisWeek()
         this.second = this.getLastDateOfThisWeek()
-      } 
-      if (strRange == 'Last Week') {
+      }
+      if (strRange === 'Last Week') {
         this.first = this.getFirstDateOfLastWeek()
         this.second = this.getLastDateOfLastWeek()
       }
@@ -240,8 +240,8 @@ export default {
         let d = new Date()
         this.first = new Date(d.getFullYear(), d.getMonth(), 1)
         this.second = new Date(d.getFullYear(), d.getMonth() + 1, 0)
-      } 
-      if (strRange == 'Last Month') {
+      }
+      if (strRange === 'Last Month') {
         let d = new Date()
         this.first = new Date(d.getFullYear(), d.getMonth() - 1, 1)
         this.second = new Date(d.getFullYear(), d.getMonth(), 0)
@@ -251,24 +251,24 @@ export default {
         this.second = undefined
       }
       if (strRange === 'Fixed Dates') {
-      } 
-      
-      if (this.first == undefined) {
+      }
+
+      if (typeof this.first === 'undefined') {
         this.dateString1 = ''
       } else {
         this.dateString1 = this.getDateString(this.first)
-      } 
-      if (this.second == undefined) {
+      }
+      if (typeof this.second === 'undefined') {
         this.dateString2 = ''
       } else {
         this.dateString2 = this.getDateString(this.second)
       }
-      
+
     },
     getFirstDateOfThisWeek() {
       let d = new Date();
       let day = d.getDay()
-      let diff = d.getDate() - day + (day == 0 ? -7 : 0)
+      let diff = d.getDate() - day + (day === 0 ? -7 : 0)
       return new Date(d.getFullYear(), d.getMonth(), diff)
     },
     getLastDateOfThisWeek() {
